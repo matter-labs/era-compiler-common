@@ -14,5 +14,5 @@ pub const BYTE_LENGTH_X64: usize = 8;
 /// The ETH address byte-length.
 pub const BYTE_LENGTH_ETH_ADDRESS: usize = 20;
 
-/// The zkEVM field byte-length.
+/// The field byte-length.
 pub const BYTE_LENGTH_FIELD: usize = 32;
