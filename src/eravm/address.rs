@@ -82,3 +82,12 @@ pub const ERAVM_ADDRESS_MULTIPLICATION_HIGH_REGISTER: u16 = 0xFFE6;
 
 /// The corresponding simulation predefined address.
 pub const ERAVM_ADDRESS_GET_GLOBAL_EXTRA_ABI_DATA: u16 = 0xFFE5;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_ACTIVE_PTR_DATA_LOAD: u16 = 0xFFE4;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_ACTIVE_PTR_DATA_COPY: u16 = 0xFFE3;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_ACTIVE_PTR_DATA_SIZE: u16 = 0xFFE2;
