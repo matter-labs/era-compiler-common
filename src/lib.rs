@@ -8,6 +8,7 @@ pub(crate) mod byte_length;
 pub(crate) mod eravm;
 pub(crate) mod exit_code;
 pub(crate) mod extension;
+pub(crate) mod utils;
 
 pub use self::base::*;
 pub use self::bit_length::*;
@@ -15,3 +16,4 @@ pub use self::byte_length::*;
 pub use self::eravm::address::*;
 pub use self::exit_code::*;
 pub use self::extension::*;
+pub use self::utils::*;
