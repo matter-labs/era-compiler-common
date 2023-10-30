@@ -91,3 +91,15 @@ pub const ERAVM_ADDRESS_ACTIVE_PTR_DATA_COPY: u16 = 0xFFE3;
 
 /// The corresponding simulation predefined address.
 pub const ERAVM_ADDRESS_ACTIVE_PTR_DATA_SIZE: u16 = 0xFFE2;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_CONST_ARRAY_DECLARE: u16 = 0xFFE1;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_CONST_ARRAY_SET: u16 = 0xFFE0;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_CONST_ARRAY_FINALIZE: u16 = 0xFFDF;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_CONST_ARRAY_GET: u16 = 0xFFDE;
