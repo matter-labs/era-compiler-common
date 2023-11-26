@@ -103,3 +103,12 @@ pub const ERAVM_ADDRESS_CONST_ARRAY_FINALIZE: u16 = 0xFFDF;
 
 /// The corresponding simulation predefined address.
 pub const ERAVM_ADDRESS_CONST_ARRAY_GET: u16 = 0xFFDE;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_DECOMMIT: u16 = 0xFFDD;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_TRANSIENT_STORAGE_LOAD: u16 = 0xFFDC;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_TRANSIENT_STORAGE_STORE: u16 = 0xFFDB;
