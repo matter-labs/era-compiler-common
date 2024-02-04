@@ -109,9 +109,3 @@ pub const ERAVM_ADDRESS_DECOMMIT: u16 = 0xFFDD;
 
 /// The corresponding simulation predefined address.
 pub const ERAVM_ADDRESS_ACTIVE_PTR_LOAD_DECOMMIT: u16 = 0xFFDC;
-
-/// The corresponding simulation predefined address.
-pub const ERAVM_ADDRESS_TRANSIENT_STORAGE_LOAD: u16 = 0xFFDB;
-
-/// The corresponding simulation predefined address.
-pub const ERAVM_ADDRESS_TRANSIENT_STORAGE_STORE: u16 = 0xFFDA;
