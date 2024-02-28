@@ -115,3 +115,6 @@ pub const ERAVM_ADDRESS_RETURN_FORWARD: u16 = 0xFFDB;
 
 /// The corresponding simulation predefined address.
 pub const ERAVM_ADDRESS_REVERT_FORWARD: u16 = 0xFFDA;
+
+/// The corresponding simulation predefined address.
+pub const ERAVM_ADDRESS_ACTIVE_PTR_SWAP: u16 = 0xFFD9;
