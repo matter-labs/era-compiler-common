@@ -1,23 +1,26 @@
-name: "Rust CI"
-on:
-  pull_request:
+name: "Build and test"
+
+on: pull_request
 
 jobs:
-  build:
-    name: cargo build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
-      - run: cargo build --verbose
 
-  formatting:
-    name: cargo fmt
+  # Check for secrets leak in the repository
+  secrets-scanner:
+    uses: matter-labs/era-compiler-ci/.github/workflows/secrets-scanner.yaml@v1
+    secrets: inherit
+
+  # Check for cargo issues
+  cargo-check:
     runs-on: ubuntu-latest
+    container:
+      image: matterlabs/llvm_runner:ubuntu22-llvm17-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - uses: actions/checkout@v4
+
+      - name: Cargo checks
+        uses: matter-labs/era-compiler-ci/.github/actions/cargo-check@v1
         with:
-          components: rustfmt
-      - name: Rustfmt Check
-        uses: actions-rust-lang/rustfmt@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build
+        run: cargo build --verbose
