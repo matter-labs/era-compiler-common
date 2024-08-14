@@ -1,26 +1,30 @@
-name: "Build and test"
+name: License and secrets check
 
-on: pull_request
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
 
-  # Check for secrets leak in the repository
-  secrets-scanner:
-    uses: matter-labs/era-compiler-ci/.github/workflows/secrets-scanner.yaml@v1
-    secrets: inherit
-
-  # Check for cargo issues
+  # Cargo checks
   cargo-check:
     runs-on: ubuntu-latest
     container:
-      image: matterlabs/llvm_runner:ubuntu22-llvm17-latest
+      image: ghcr.io/matter-labs/zksync-llvm-runner:latest
     steps:
       - uses: actions/checkout@v4
-
       - name: Cargo checks
         uses: matter-labs/era-compiler-ci/.github/actions/cargo-check@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build
-        run: cargo build --verbose
+  # Check for secrets leak in the repository
+  secrets-scanner:
+    uses: matter-labs/era-compiler-ci/.github/workflows/secrets-scanner.yaml@main
+    secrets: inherit
