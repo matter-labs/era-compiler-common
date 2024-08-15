@@ -20,6 +20,7 @@ pub use self::eravm::address::*;
 pub use self::evm_version::EVMVersion;
 pub use self::exit_code::*;
 pub use self::extension::*;
-pub use self::hash::*;
+pub use self::hash::r#type::Type as HashType;
+pub use self::hash::Hash;
 pub use self::target::Target;
 pub use self::utils::*;
