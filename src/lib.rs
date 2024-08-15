@@ -9,6 +9,8 @@ pub(crate) mod eravm;
 pub(crate) mod evm_version;
 pub(crate) mod exit_code;
 pub(crate) mod extension;
+pub(crate) mod hash;
+pub(crate) mod target;
 pub(crate) mod utils;
 
 pub use self::base::*;
@@ -18,4 +20,6 @@ pub use self::eravm::address::*;
 pub use self::evm_version::EVMVersion;
 pub use self::exit_code::*;
 pub use self::extension::*;
+pub use self::hash::*;
+pub use self::target::Target;
 pub use self::utils::*;
