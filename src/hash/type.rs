@@ -12,9 +12,12 @@ pub enum Type {
     /// Do not include bytecode hash.
     #[serde(rename = "none")]
     None,
-    /// The default keccak256 hash.
+    /// The `keccak256`` hash type.
     #[serde(rename = "keccak256")]
     Keccak256,
+    /// The `ipfs` hash.
+    #[serde(rename = "ipfs")]
+    Ipfs,
 }
 
 impl FromStr for Type {
@@ -24,6 +27,7 @@ impl FromStr for Type {
         match string {
             "none" => Ok(Self::None),
             "keccak256" => Ok(Self::Keccak256),
+            "ipfs" => Ok(Self::Ipfs),
             string => anyhow::bail!("unknown bytecode hash mode: `{string}`"),
         }
     }
