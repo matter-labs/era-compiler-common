@@ -2,13 +2,14 @@
 //! The EVM version.
 //!
 
-use serde::Deserialize;
-use serde::Serialize;
+use std::str::FromStr;
 
 ///
 /// The EVM version.
 ///
-#[derive(Debug, Serialize, Deserialize, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+    Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, serde::Serialize, serde::Deserialize,
+)]
 #[serde(rename_all = "camelCase")]
 pub enum EVMVersion {
     /// The corresponding EVM version.
@@ -49,10 +50,10 @@ pub enum EVMVersion {
     Cancun,
 }
 
-impl TryFrom<&str> for EVMVersion {
-    type Error = anyhow::Error;
+impl FromStr for EVMVersion {
+    type Err = anyhow::Error;
 
-    fn try_from(value: &str) -> Result<Self, Self::Error> {
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
         Ok(match value {
             "homestead" => Self::Homestead,
             "tangerineWhistle" => Self::TangerineWhistle,
@@ -66,7 +67,27 @@ impl TryFrom<&str> for EVMVersion {
             "paris" => Self::Paris,
             "shanghai" => Self::Shanghai,
             "cancun" => Self::Cancun,
-            _ => anyhow::bail!("Invalid EVM version: {}", value),
+            _ => anyhow::bail!(
+                "Unknown EVM version: {value}. Supported targets: {}",
+                vec![
+                    Self::Homestead,
+                    Self::TangerineWhistle,
+                    Self::SpuriousDragon,
+                    Self::Byzantium,
+                    Self::Constantinople,
+                    Self::Petersburg,
+                    Self::Istanbul,
+                    Self::Berlin,
+                    Self::London,
+                    Self::Paris,
+                    Self::Shanghai,
+                    Self::Cancun,
+                ]
+                .into_iter()
+                .map(|target| target.to_string())
+                .collect::<Vec<String>>()
+                .join(", ")
+            ),
         })
     }
 }
