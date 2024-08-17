@@ -5,6 +5,8 @@
 pub mod r#type;
 
 use base58::FromBase58;
+use sha3::digest::FixedOutput;
+use sha3::Digest;
 
 ///
 /// The hash.
@@ -32,9 +34,20 @@ impl Hash {
     /// Computes the `keccak256` hash for `preimage`.
     ///
     pub fn keccak256(preimage: &[u8]) -> Self {
-        use sha3::Digest;
-
         let bytes = sha3::Keccak256::digest(preimage).into();
+        let string = format!("0x{}", hex::encode(bytes));
+        Self::Keccak256 { bytes, string }
+    }
+
+    ///
+    /// Computes the `keccak256` hash for an array of `preimages`.
+    ///
+    pub fn keccak256_multiple(preimages: &[&[u8]]) -> Self {
+        let mut hasher = sha3::Keccak256::new();
+        for preimage in preimages.iter() {
+            hasher.update(preimage);
+        }
+        let bytes: [u8; crate::BYTE_LENGTH_FIELD] = hasher.finalize_fixed().into();
         let string = format!("0x{}", hex::encode(bytes));
         Self::Keccak256 { bytes, string }
     }
@@ -80,6 +93,19 @@ mod tests {
         assert_eq!(
             super::Hash::keccak256("zksync".as_bytes()).to_string(),
             "0x0238fb1ab06c28c32885f9a4842207ac480c2467df26b6c58e201679628c5a5b"
+        );
+    }
+
+    #[test]
+    fn keccak256_multiple() {
+        assert_eq!(
+            super::Hash::keccak256_multiple(&[
+                "zksync".as_bytes(),
+                "the".as_bytes(),
+                "best".as_bytes()
+            ])
+            .to_string(),
+            "0x30277e6e189b3fa474437d451ccbb2409c3b67fda53c6ad5df3f8f0f3873ff6b"
         );
     }
 
