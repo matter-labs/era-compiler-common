@@ -42,7 +42,7 @@ impl Hash {
     ///
     /// Computes the `keccak256` hash for an array of `preimages`.
     ///
-    pub fn keccak256_multiple(preimages: &[&[u8]]) -> Self {
+    pub fn keccak256_multiple<R: AsRef<[u8]>>(preimages: &[R]) -> Self {
         let mut hasher = sha3::Keccak256::new();
         for preimage in preimages.iter() {
             hasher.update(preimage);
