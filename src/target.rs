@@ -17,32 +17,12 @@ pub enum Target {
 
 impl Target {
     ///
-    /// Returns the target name.
-    ///
-    pub fn name(&self) -> &str {
-        match self {
-            Self::EraVM => "eravm",
-            Self::EVM => "evm",
-        }
-    }
-
-    ///
-    /// Returns the target triple.
+    /// Returns the LLVM target triple.
     ///
     pub fn triple(&self) -> &str {
         match self {
             Self::EraVM => "eravm-unknown-unknown",
             Self::EVM => "evm-unknown-unknown",
-        }
-    }
-
-    ///
-    /// Returns the target production name.
-    ///
-    pub fn production_name(&self) -> &str {
-        match self {
-            Self::EraVM => "EraVM",
-            Self::EVM => "EVM",
         }
     }
 }
@@ -55,9 +35,13 @@ impl FromStr for Target {
             "eravm" => Ok(Self::EraVM),
             "evm" => Ok(Self::EVM),
             _ => Err(anyhow::anyhow!(
-                "Unknown target `{}`. Supported targets: {:?}",
+                "Unknown target `{}`. Supported targets: {}",
                 string,
                 vec![Self::EraVM, Self::EVM]
+                    .into_iter()
+                    .map(|target| target.to_string())
+                    .collect::<Vec<String>>()
+                    .join(", ")
             )),
         }
     }
