@@ -1,0 +1,17 @@
+[package]
+name = "era-solc-downloader"
+version = "0.1.0"
+authors.workspace = true
+license.workspace = true
+edition.workspace = true
+
+[dependencies]
+colored = "2.1.0"
+reqwest = { version = "0.11", features = ["blocking", "json"] }
+serde = { version = "1.0", "features" = [ "derive" ] }
+anyhow = "1.0"
+serde_json = { version = "1.0", features = [ "arbitrary_precision" ] }
+
+# Musl requires explicit openssl dependency
+[target.'cfg(target_env = "musl")'.dependencies]
+openssl = { version = "0.10", features = ["vendored"] }
