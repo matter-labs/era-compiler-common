@@ -2,7 +2,7 @@
 
 members = [
     "common",
-    "solc-downloader",
+    "era-compiler-downloader",
 ]
 resolver = "2"
 

@@ -16,7 +16,7 @@ pub enum Protocol {
     /// Download via HTTPS.
     #[serde(rename = "https")]
     HTTPS,
-    /// Use the solc-bin JSON list.
-    #[serde(rename = "solc-bin-list")]
-    SolcBinList,
+    /// Use the compiler-bin JSON list.
+    #[serde(rename = "compiler-bin-list")]
+    CompilerBinList,
 }
