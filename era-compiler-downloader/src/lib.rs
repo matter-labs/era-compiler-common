@@ -10,7 +10,7 @@ use std::str::FromStr;
 use colored::Colorize;
 
 use self::config::binary::protocol::Protocol;
-use self::config::solc_list::SolcList;
+use self::config::compiler_list::CompilerList;
 use self::config::Config;
 
 ///
@@ -20,8 +20,8 @@ use self::config::Config;
 pub struct Downloader {
     /// The `reqwest` HTTP client.
     http_client: reqwest::blocking::Client,
-    /// The solc-bin JSON list metadata.
-    solc_list: Option<SolcList>,
+    /// The compiler-bin JSON list metadata.
+    compiler_list: Option<CompilerList>,
 }
 
 impl Downloader {
@@ -31,7 +31,7 @@ impl Downloader {
     pub fn new(http_client: reqwest::blocking::Client) -> Self {
         Self {
             http_client,
-            solc_list: None,
+            compiler_list: None,
         }
     }
 
@@ -113,29 +113,29 @@ impl Downloader {
                     );
                     self.http_client.get(source_url).send()?.bytes()?
                 }
-                Protocol::SolcBinList => {
+                Protocol::CompilerBinList => {
                     if destination_path.exists() {
                         continue;
                     }
 
-                    let solc_list_path = PathBuf::from(source_path.as_str());
-                    let solc_list = self.solc_list.get_or_insert_with(|| {
-                        SolcList::try_from(solc_list_path.as_path())
-                            .expect("solc-bin JSON list downloading error")
+                    let compiler_list_path = PathBuf::from(source_path.as_str());
+                    let compiler_list = self.compiler_list.get_or_insert_with(|| {
+                        CompilerList::try_from(compiler_list_path.as_path())
+                            .expect("compiler-bin JSON list downloading error")
                     });
-                    if solc_list.releases.is_empty() {
+                    if compiler_list.releases.is_empty() {
                         return Ok(config);
                     }
 
                     let source_binary_name =
-                        match solc_list.releases.get(version.to_string().as_str()) {
+                        match compiler_list.releases.get(version.to_string().as_str()) {
                             Some(source_binary_name) => source_binary_name,
                             None => anyhow::bail!(
-                                "Binary for version v{} not found in the solc JSON list",
+                                "Binary for version v{} not found in the compiler JSON list",
                                 version
                             ),
                         };
-                    let mut source_path = solc_list_path;
+                    let mut source_path = compiler_list_path;
                     source_path.pop();
                     source_path.push(source_binary_name);
 

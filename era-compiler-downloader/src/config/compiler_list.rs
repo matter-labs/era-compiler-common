@@ -1,5 +1,5 @@
 //!
-//! The Solidity compiler JSON list metadata.
+//! The compiler JSON list metadata.
 //!
 
 use std::collections::BTreeMap;
@@ -10,26 +10,26 @@ use colored::Colorize;
 use serde::Deserialize;
 
 ///
-/// The Solidity compiler JSON list metadata.
+/// The compiler JSON list metadata.
 ///
 #[derive(Debug, Deserialize)]
-pub struct SolcList {
+pub struct CompilerList {
     /// The collection of compiler releases.
     pub releases: BTreeMap<String, String>,
 }
 
-impl TryFrom<&Path> for SolcList {
+impl TryFrom<&Path> for CompilerList {
     type Error = anyhow::Error;
 
     fn try_from(path: &Path) -> Result<Self, Self::Error> {
         let url =
             reqwest::Url::from_str(path.to_str().expect("Always valid")).expect("Always valid");
         println!(
-            " {} solc-bin JSON `{}`",
+            " {} compiler bin JSON `{}`",
             "Downloading".bright_green().bold(),
             url
         );
-        let list: SolcList = reqwest::blocking::get(url)?.json()?;
+        let list: CompilerList = reqwest::blocking::get(url)?.json()?;
         Ok(list)
     }
 }

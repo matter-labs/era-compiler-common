@@ -3,7 +3,7 @@
 //!
 
 pub mod binary;
-pub(crate) mod solc_list;
+pub(crate) mod compiler_list;
 
 use std::collections::BTreeMap;
 use std::collections::HashMap;
@@ -41,7 +41,7 @@ impl Config {
             } else if cfg!(target_os = "windows") {
                 "windows-amd64"
             } else {
-                anyhow::bail!("This platform is not supported in `solc`!");
+                anyhow::bail!("This platform is not supported!");
             }
         } else if cfg!(target_arch = "aarch64") {
             if cfg!(target_os = "linux") {
@@ -49,10 +49,10 @@ impl Config {
             } else if cfg!(target_os = "macos") {
                 "macos-arm64"
             } else {
-                anyhow::bail!("This platform is not supported in `solc`!");
+                anyhow::bail!("This platform is not supported!");
             }
         } else {
-            anyhow::bail!("This platform is not supported in `solc`!");
+            anyhow::bail!("This platform is not supported!");
         };
 
         platforms
