@@ -1,7 +1,7 @@
 [workspace]
 
 members = [
-    "common",
+    "era-compiler-common",
     "era-compiler-downloader",
 ]
 resolver = "2"
