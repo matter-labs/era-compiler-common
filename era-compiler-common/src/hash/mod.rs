@@ -75,6 +75,23 @@ impl Hash {
             Self::Ipfs { bytes, .. } => bytes.as_slice(),
         }
     }
+
+    ///
+    /// Converts the hash into a CBOR-encoded byte array.
+    ///
+    pub fn as_cbor_bytes(&self) -> Vec<u8> {
+        let data = match self {
+            Self::Ipfs { bytes, .. } => bytes.as_slice(),
+            Self::Keccak256 { .. } => panic!("Only IPFS hash can be CBOR-encoded"),
+        };
+
+        let mut cbor = Vec::with_capacity(64);
+        cbor.extend(hex::decode("a2646970667358").expect("Always valid"));
+        cbor.push(data.len() as u8);
+        cbor.extend_from_slice(data);
+        cbor.extend((cbor.len() as u16).to_be_bytes());
+        cbor
+    }
 }
 
 impl std::fmt::Display for Hash {
@@ -114,6 +131,22 @@ mod tests {
         assert_eq!(
             super::Hash::ipfs("zksync".as_bytes()).to_string(),
             "QmZNRNrU4GknvaB3kMuH2tMjw2ji9fCmeVA9R6yPboiF4J"
+        );
+    }
+
+    #[test]
+    fn ipfs_hex() {
+        assert_eq!(
+            hex::encode(super::Hash::ipfs("zksync".as_bytes()).as_bytes()),
+            "1220a3e4a4b11362b17e7294afb3048e97a6cb024209f236d7388ef55476192413bf"
+        );
+    }
+
+    #[test]
+    fn ipfs_cbor() {
+        assert_eq!(
+            hex::encode(super::Hash::ipfs("zksync".as_bytes()).as_cbor_bytes()),
+            "a2646970667358221220a3e4a4b11362b17e7294afb3048e97a6cb024209f236d7388ef55476192413bf002a"
         );
     }
 }
