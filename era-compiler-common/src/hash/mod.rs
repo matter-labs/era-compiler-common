@@ -11,7 +11,7 @@ use sha3::Digest;
 ///
 /// The hash.
 ///
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub enum Hash {
     /// The `keccak256` hash.
     Keccak256 {
@@ -23,6 +23,7 @@ pub enum Hash {
     /// The `ipfs` hash.
     Ipfs {
         /// The byte representation.
+        #[serde(with = "serde_arrays")]
         bytes: [u8; 2 + crate::BYTE_LENGTH_FIELD],
         /// The string representation.
         string: String,
