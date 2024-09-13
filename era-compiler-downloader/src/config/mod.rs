@@ -2,15 +2,15 @@
 //! The compiler downloader config.
 //!
 
-pub mod binary;
 pub(crate) mod compiler_list;
+pub mod executable;
 
 use std::collections::BTreeMap;
 use std::collections::HashMap;
 
 use serde::Deserialize;
 
-use self::binary::Binary;
+use self::executable::Executable;
 
 ///
 /// The compiler downloader config.
@@ -18,7 +18,7 @@ use self::binary::Binary;
 #[derive(Debug, Deserialize)]
 pub struct Config {
     /// The compiler binaries to download.
-    pub binaries: BTreeMap<String, Binary>,
+    pub binaries: BTreeMap<String, Executable>,
     /// The compiler platform directory names.
     pub platforms: Option<HashMap<String, String>>,
 }
