@@ -9,8 +9,8 @@ use std::str::FromStr;
 
 use colored::Colorize;
 
-use self::config::binary::protocol::Protocol;
 use self::config::compiler_list::CompilerList;
+use self::config::executable::protocol::Protocol;
 use self::config::Config;
 
 ///
@@ -57,40 +57,49 @@ impl Downloader {
 
         let platform_directory = config.get_remote_platform_directory()?;
 
-        for (version, binary) in config.binaries.iter() {
-            if !binary.is_enabled {
+        for (version, executable) in config.binaries.iter() {
+            if !executable.is_enabled {
                 continue;
             }
 
-            let source_path = binary
+            let source_path = executable
                 .source
                 .replace("${PLATFORM}", platform_directory.as_str())
                 .replace("${VERSION}", version.as_str())
                 + (std::env::consts::EXE_SUFFIX);
 
-            let destination_path = binary.destination.replace("${VERSION}", version.as_str());
+            let destination_path = executable
+                .destination
+                .replace("${VERSION}", version.as_str());
             let destination_path = PathBuf::from_str(
                 format!("{}{}", destination_path, std::env::consts::EXE_SUFFIX).as_str(),
             )
-            .map_err(|_| anyhow::anyhow!("Binary `{}` destination is invalid", destination_path))?;
+            .map_err(|_| {
+                anyhow::anyhow!("Executable `{}` destination is invalid", destination_path)
+            })?;
 
-            let data = match binary.protocol {
+            let data = match executable.protocol {
                 Protocol::File => {
                     if source_path == destination_path.to_string_lossy() {
+                        println!(
+                            "    {} executable {:?}. The source and destination are the same.",
+                            "Skipping".bright_green().bold(),
+                            destination_path,
+                        );
                         continue;
                     }
 
                     println!(
-                        "     {} binary `{}` => {:?}",
+                        "     {} executable `{}` => {:?}",
                         "Copying".bright_green().bold(),
                         source_path,
                         destination_path,
                     );
 
-                    std::fs::copy(source_path.as_str(), binary.destination.as_str()).map_err(
+                    std::fs::copy(source_path.as_str(), executable.destination.as_str()).map_err(
                         |error| {
                             anyhow::anyhow!(
-                                "Binary {:?} copying error: {}",
+                                "Executable {:?} copying error: {}",
                                 source_path.as_str(),
                                 error
                             )
@@ -100,13 +109,18 @@ impl Downloader {
                 }
                 Protocol::HTTPS => {
                     if destination_path.exists() {
+                        println!(
+                            "    {} executable {:?}. Already exists.",
+                            "Skipping".bright_green().bold(),
+                            destination_path,
+                        );
                         continue;
                     }
 
                     let source_url =
                         reqwest::Url::from_str(source_path.as_str()).expect("Always valid");
                     println!(
-                        " {} binary `{}` => {:?}",
+                        " {} executable `{}` => {:?}",
                         "Downloading".bright_green().bold(),
                         source_url,
                         destination_path,
@@ -115,6 +129,11 @@ impl Downloader {
                 }
                 Protocol::CompilerBinList => {
                     if destination_path.exists() {
+                        println!(
+                            "    {} executable {:?}. Already exists.",
+                            "Skipping".bright_green().bold(),
+                            destination_path,
+                        );
                         continue;
                     }
 
@@ -127,23 +146,23 @@ impl Downloader {
                         return Ok(config);
                     }
 
-                    let source_binary_name =
+                    let source_executable_name =
                         match compiler_list.releases.get(version.to_string().as_str()) {
-                            Some(source_binary_name) => source_binary_name,
+                            Some(source_executable_name) => source_executable_name,
                             None => anyhow::bail!(
-                                "Binary for version v{} not found in the compiler JSON list",
+                                "Executable for version v{} not found in the compiler JSON list",
                                 version
                             ),
                         };
                     let mut source_path = compiler_list_path;
                     source_path.pop();
-                    source_path.push(source_binary_name);
+                    source_path.push(source_executable_name);
 
                     let source_url =
                         reqwest::Url::from_str(source_path.to_str().expect("Always valid"))
                             .expect("Always valid");
                     println!(
-                        " {} binary `{}` => {:?}",
+                        " {} executable `{}` => {:?}",
                         "Downloading".bright_green().bold(),
                         source_url,
                         destination_path,

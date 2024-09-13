@@ -1,11 +1,11 @@
 //!
-//! The compiler downloader binary download protocol.
+//! The compiler downloader executable download protocol.
 //!
 
 use serde::Deserialize;
 
 ///
-/// The compiler downloader binary download protocol.
+/// The compiler downloader executable download protocol.
 ///
 #[derive(Debug, Deserialize)]
 #[allow(clippy::upper_case_acronyms)]
