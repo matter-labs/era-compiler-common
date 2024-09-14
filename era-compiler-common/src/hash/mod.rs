@@ -87,7 +87,7 @@ impl Hash {
         };
 
         let mut cbor = Vec::with_capacity(64);
-        cbor.extend(hex::decode("a2646970667358").expect("Always valid"));
+        cbor.extend(hex::decode("a1646970667358").expect("Always valid"));
         cbor.push(data.len() as u8);
         cbor.extend_from_slice(data);
         cbor.extend((cbor.len() as u16).to_be_bytes());
