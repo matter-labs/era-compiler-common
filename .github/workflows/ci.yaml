@@ -1,4 +1,4 @@
-name: License and secrets check
+name: Build and test
 
 on:
   pull_request:
@@ -26,5 +26,21 @@ jobs:
 
   # Check for secrets leak in the repository
   secrets-scanner:
-    uses: matter-labs/era-compiler-ci/.github/workflows/secrets-scanner.yaml@main
+    uses: matter-labs/era-compiler-ci/.github/workflows/secrets-scanner.yaml@v1
     secrets: inherit
+
+  build-test:
+    runs-on: matterlabs-ci-runner-high-performance
+    container:
+      image: ghcr.io/matter-labs/zksync-llvm-runner:latest
+    steps:
+
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Run unit tests
+        uses: matter-labs/era-compiler-ci/.github/actions/rust-unit-tests@v1
+        with:
+          target: "x86_64-unknown-linux-gnu"
+          enable-coverage: true
+          coverage-token: ${{ secrets.CODECOV_TOKEN }}

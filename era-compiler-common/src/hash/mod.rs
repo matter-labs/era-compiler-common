@@ -147,7 +147,7 @@ mod tests {
     fn ipfs_cbor() {
         assert_eq!(
             hex::encode(super::Hash::ipfs("zksync".as_bytes()).as_cbor_bytes()),
-            "a2646970667358221220a3e4a4b11362b17e7294afb3048e97a6cb024209f236d7388ef55476192413bf002a"
+            "a1646970667358221220a3e4a4b11362b17e7294afb3048e97a6cb024209f236d7388ef55476192413bf002a"
         );
     }
 }
