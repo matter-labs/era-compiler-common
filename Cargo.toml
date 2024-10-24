@@ -1,5 +1,4 @@
 [workspace]
-
 members = [
     "era-compiler-common",
     "era-compiler-downloader",
