@@ -2,12 +2,10 @@
 //! The compiler downloader executable download protocol.
 //!
 
-use serde::Deserialize;
-
 ///
 /// The compiler downloader executable download protocol.
 ///
-#[derive(Debug, Deserialize)]
+#[derive(Debug, serde::Deserialize)]
 #[allow(clippy::upper_case_acronyms)]
 pub enum Protocol {
     /// The local file copy.

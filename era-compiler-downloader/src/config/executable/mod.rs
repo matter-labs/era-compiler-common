@@ -4,14 +4,12 @@
 
 pub mod protocol;
 
-use serde::Deserialize;
-
 use self::protocol::Protocol;
 
 ///
 /// The compiler downloader executable config.
 ///
-#[derive(Debug, Deserialize)]
+#[derive(Debug, serde::Deserialize)]
 pub struct Executable {
     /// Whether downloading the executable is enabled.
     pub is_enabled: bool,

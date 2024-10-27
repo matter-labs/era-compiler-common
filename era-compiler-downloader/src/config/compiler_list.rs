@@ -7,12 +7,11 @@ use std::path::Path;
 use std::str::FromStr;
 
 use colored::Colorize;
-use serde::Deserialize;
 
 ///
 /// The compiler JSON list metadata.
 ///
-#[derive(Debug, Deserialize)]
+#[derive(Debug, serde::Deserialize)]
 pub struct CompilerList {
     /// The collection of compiler releases.
     pub releases: BTreeMap<String, String>,
