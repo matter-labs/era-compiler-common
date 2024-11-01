@@ -4,6 +4,7 @@ authors.workspace = true
 license.workspace = true
 edition.workspace = true
 version.workspace = true
+description = "Downloader for dependencies of the ZKsync compilers"
 
 [dependencies]
 anyhow = "=1.0.89"
