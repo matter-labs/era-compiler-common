@@ -1,10 +1,10 @@
 [package]
 name = "era-compiler-common"
-description = "Shared constants of the ZKsync compilers"
 authors.workspace = true
 license.workspace = true
 edition.workspace = true
 version.workspace = true
+description = "Shared constants of the ZKsync compilers"
 
 [lib]
 doctest = false
