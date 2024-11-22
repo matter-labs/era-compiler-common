@@ -24,11 +24,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-  # Check for secrets leak in the repository
-  secrets-scanner:
-    uses: matter-labs/era-compiler-ci/.github/workflows/secrets-scanner.yaml@v1
-    secrets: inherit
-
   build-test:
     runs-on: matterlabs-ci-runner-high-performance
     container:
@@ -44,3 +39,17 @@ jobs:
           target: "x86_64-unknown-linux-gnu"
           enable-coverage: true
           coverage-token: ${{ secrets.CODECOV_TOKEN }}
+
+  # Special job that allows some of the jobs to be skipped or failed
+  # requiring others to be successful
+  pr-checks:
+    runs-on: ubuntu-latest
+    if: always()
+    needs:
+      - cargo-check
+      - build-test
+    steps:
+      - name: Decide on PR checks
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
