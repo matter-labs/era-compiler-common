@@ -12,6 +12,7 @@ pub(crate) mod evm_version;
 pub(crate) mod exit_code;
 pub(crate) mod extension;
 pub(crate) mod hash;
+pub(crate) mod object_format;
 pub(crate) mod target;
 pub(crate) mod utils;
 
@@ -26,5 +27,6 @@ pub use self::exit_code::*;
 pub use self::extension::*;
 pub use self::hash::r#type::Type as HashType;
 pub use self::hash::Hash;
+pub use self::object_format::ObjectFormat;
 pub use self::target::Target;
 pub use self::utils::*;
