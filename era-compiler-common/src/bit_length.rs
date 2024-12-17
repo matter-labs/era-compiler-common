@@ -1,5 +1,5 @@
 //!
-//! The common sizes in bits.
+//! Sizes in bits.
 //!
 
 /// The `bool` type bit-length.

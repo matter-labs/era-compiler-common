@@ -1,5 +1,5 @@
 //!
-//! The common sizes in bytes.
+//! Sizes in bytes.
 //!
 
 /// The byte-length.

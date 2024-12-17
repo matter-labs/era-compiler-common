@@ -1,5 +1,5 @@
 //!
-//! The number base constants.
+//! Number bases.
 //!
 
 /// The binary number base.

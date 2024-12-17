@@ -32,3 +32,13 @@ impl FromStr for Type {
         }
     }
 }
+
+impl std::fmt::Display for Type {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            Self::None => write!(f, "none"),
+            Self::Keccak256 => write!(f, "keccak256"),
+            Self::Ipfs => write!(f, "ipfs"),
+        }
+    }
+}

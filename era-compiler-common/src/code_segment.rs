@@ -1,9 +1,11 @@
 //!
-//! The contract code segment.
+//! Contract code segment.
 //!
 
+use std::str::FromStr;
+
 ///
-/// The contract code segment.
+/// Contract code segment.
 ///
 /// On EraVM, the segments do not represent any entities in the final bytecode, but this separation is present
 /// in IRs used for lowering.
@@ -19,6 +21,18 @@ pub enum CodeSegment {
     Deploy,
     /// The runtime code segment.
     Runtime,
+}
+
+impl FromStr for CodeSegment {
+    type Err = anyhow::Error;
+
+    fn from_str(string: &str) -> Result<Self, Self::Err> {
+        match string {
+            "deploy" => Ok(Self::Deploy),
+            "runtime" => Ok(Self::Runtime),
+            string => anyhow::bail!("unknown code segment: `{string}`"),
+        }
+    }
 }
 
 impl std::fmt::Display for CodeSegment {

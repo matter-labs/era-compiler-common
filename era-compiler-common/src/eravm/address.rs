@@ -1,5 +1,5 @@
 //!
-//! The EraVM address constants.
+//! EraVM address constants.
 //!
 
 /// The corresponding simulation predefined address.

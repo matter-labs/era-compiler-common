@@ -1,9 +1,9 @@
 //!
-//! The contract name.
+//! Contract compound name.
 //!
 
 ///
-/// The contract name.
+/// Contract compound name.
 ///
 /// Every language we support has a different way of defining the contract name.
 /// This structure simplifies passing the contract name through the compilation pipeline.

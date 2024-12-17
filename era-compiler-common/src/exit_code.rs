@@ -1,5 +1,5 @@
 //!
-//! The exit code constants.
+//! Exit code constants.
 //!
 
 /// The common application success exit code.

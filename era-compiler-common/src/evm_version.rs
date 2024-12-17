@@ -1,11 +1,11 @@
 //!
-//! The EVM version.
+//! EVM version.
 //!
 
 use std::str::FromStr;
 
 ///
-/// The EVM version.
+/// EVM version.
 ///
 #[derive(
     Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, serde::Serialize, serde::Deserialize,

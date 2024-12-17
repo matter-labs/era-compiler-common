@@ -1,5 +1,5 @@
 //!
-//! The file extensions.
+//! File extensions.
 //!
 
 /// The manifest file extension.
