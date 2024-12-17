@@ -1,5 +1,5 @@
 //!
-//! The hash.
+//! Hashing utilities.
 //!
 
 pub mod r#type;
@@ -9,7 +9,7 @@ use sha3::digest::FixedOutput;
 use sha3::Digest;
 
 ///
-/// The hash.
+/// Hash types supported so far.
 ///
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize)]
 pub enum Hash {

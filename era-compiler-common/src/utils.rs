@@ -1,5 +1,5 @@
 //!
-//! The compiler common utils.
+//! Common compiler utilities.
 //!
 
 ///

@@ -1,5 +1,5 @@
 //!
-//! The EraVM constants.
+//! EraVM-specific constants.
 //!
 
 pub mod address;

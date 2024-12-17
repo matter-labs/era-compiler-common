@@ -1,5 +1,5 @@
 //!
-//! The compiler common library.
+//! Compiler common library.
 //!
 
 pub(crate) mod base;
