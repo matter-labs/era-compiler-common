@@ -12,7 +12,7 @@ doctest = false
 [dependencies]
 anyhow = "=1.0.89"
 serde = { version = "=1.0.210", features = ["derive"] }
-serde_json = { version = "=1.0.128", features = [ "arbitrary_precision", "unbounded_depth" ] }
+serde_json = { version = "=1.0.133", features = [ "arbitrary_precision", "unbounded_depth" ] }
 serde_stacker = "=0.1.11"
 serde_arrays = "=0.1.0"
 

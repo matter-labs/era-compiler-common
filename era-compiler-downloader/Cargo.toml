@@ -10,7 +10,7 @@ description = "Downloader for dependencies of the ZKsync compilers"
 anyhow = "=1.0.89"
 colored = "=2.1.0"
 serde = { version = "=1.0.210", "features" = [ "derive" ] }
-serde_json = { version = "=1.0.128", features = [ "arbitrary_precision" ] }
+serde_json = { version = "=1.0.133", features = [ "arbitrary_precision" ] }
 
 reqwest = { version = "=0.11.27", features = ["blocking", "json"] }
 
