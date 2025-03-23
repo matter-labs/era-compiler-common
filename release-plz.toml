@@ -1,2 +1,0 @@
-[workspace]
-git_release_enable = false # disable github releases for each package
