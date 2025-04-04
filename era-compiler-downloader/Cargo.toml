@@ -7,13 +7,13 @@ version.workspace = true
 description = "Downloader for dependencies of the ZKsync compilers"
 
 [dependencies]
-anyhow = "=1.0.89"
-colored = "=2.1.0"
-serde = { version = "=1.0.210", "features" = [ "derive" ] }
-serde_json = { version = "=1.0.128", features = [ "arbitrary_precision" ] }
+anyhow = "1.0"
+colored = "3.0"
+serde = { version = "1.0", "features" = [ "derive" ] }
+serde_json = { version = "1.0", features = [ "arbitrary_precision" ] }
 
-reqwest = { version = "=0.12.12", features = ["blocking", "json"] }
+reqwest = { version = "0.12", features = ["blocking", "json"] }
 
-# Musl requires explicit openssl dependency
+# MUSL requires an explicit OpenSSL dependency
 [target.'cfg(target_env = "musl")'.dependencies]
-openssl = { version = "=0.10.70", features = ["vendored"] }
+openssl = { version = "0.10", features = ["vendored"] }
