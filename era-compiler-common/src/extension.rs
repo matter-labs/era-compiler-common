@@ -23,6 +23,9 @@ pub static EXTENSION_ETHIR: &str = "ethir";
 /// The EVM file extension.
 pub static EXTENSION_EVM: &str = "evm";
 
+/// The EVM assembly file extension.
+pub static EXTENSION_EVM_ASSEMBLY: &str = "asm";
+
 /// The EVM bytecode file extension.
 pub static EXTENSION_EVM_BINARY: &str = "bin";
 
