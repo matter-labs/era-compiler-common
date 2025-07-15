@@ -49,3 +49,18 @@ pub static EXTENSION_ERAVM_ASSEMBLY: &str = "zasm";
 
 /// The EraVM bytecode file extension.
 pub static EXTENSION_ERAVM_BINARY: &str = "zbin";
+
+/// The Solidity AST file extension.
+pub static EXTENSION_SOLIDITY_AST: &str = "ast";
+
+/// The Solidity ABI file extension.
+pub static EXTENSION_SOLIDITY_ABI: &str = "abi";
+
+/// The Solidity function signatures file extension.
+pub static EXTENSION_SOLIDITY_SIGNATURES: &str = "signatures";
+
+/// The Solidity developer documentation file extension.
+pub static EXTENSION_SOLIDITY_DOCDEV: &str = "docdev";
+
+/// The Solidity user documentation file extension.
+pub static EXTENSION_SOLIDITY_DOCUSER: &str = "docuser";
