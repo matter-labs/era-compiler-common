@@ -53,8 +53,8 @@ impl Libraries {
             .iter()
             .flat_map(|(file, names)| {
                 names
-                    .iter()
-                    .map(|(name, _address)| format!("{file}:{name}"))
+                    .keys()
+                    .map(|name| format!("{file}:{name}"))
                     .collect::<BTreeSet<String>>()
             })
             .collect::<BTreeSet<String>>()
