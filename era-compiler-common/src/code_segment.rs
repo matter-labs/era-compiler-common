@@ -7,10 +7,8 @@ use std::str::FromStr;
 ///
 /// Contract code segment.
 ///
-/// On EraVM, the segments do not represent any entities in the final bytecode, but this separation is present
+/// The segments do not represent any entities in the final bytecode, but this separation is present
 /// in IRs used for lowering.
-///
-/// On EVM, the segments represent deploy and runtime code segments without changes.
 ///
 #[derive(
     Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, serde::Serialize, serde::Deserialize,
